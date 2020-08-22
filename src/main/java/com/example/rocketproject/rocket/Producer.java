@@ -17,11 +17,14 @@ public class Producer {
         producer.setNamesrvAddr("139.155.54.93:9876");
         // 启动Producer
         producer.start();
-        // 创建消息对象，topic为：myTopic001，消息内容为：hello world
-        Message msg = new Message("myTopic001", "hello world".getBytes());
-        // 发送消息到mq，同步的
-        SendResult result = producer.send(msg);
-        System.out.println("发送消息成功！result is : " + result);
+        for (int i = 0; i < 10; i++) {
+            // 创建消息对象，topic为：myTopic001，消息内容为：hello world
+            Message message = new Message("orderTopic","order1","order-key", ("hello!" + i).getBytes());
+            // 发送消息到mq，同步的
+            SendResult result = producer.send(message);
+            System.out.println("发送消息成功！result is : " + result);
+        }
+
         // 关闭Producer
         producer.shutdown();
         System.out.println("生产者 shutdown！");

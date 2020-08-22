@@ -16,13 +16,13 @@ import java.util.List;
 public class Consumer {
     public static void main(String[] args) throws Exception {
         // 指定消费组名为my-consumer
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("my-consumer");
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("my-consumer1");
         // 配置namesrv地址
         consumer.setNamesrvAddr("139.155.54.93:9876");
         // 订阅topic：myTopic001 下的全部消息（因为是*，*指定的是tag标签，代表全部消息，不进行任何过滤）
 //        consumer.subscribe("myTopic001", "*");
         // 注册监听器，进行消息消息。
-        consumer.subscribe("myTopic001", "test-tags");
+        consumer.subscribe("orderTopic", "order1");
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
